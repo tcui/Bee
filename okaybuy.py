@@ -7,8 +7,7 @@ Customized parsers for okaybuy
 
 initial seed:
 
-http://www.okaybuy.com.cn/list.php?code=001000000&gender=1
-http://www.okaybuy.com.cn/list.php?code=001000000&gender=2
+"http://www.okaybuy.com.cn/list.php?code=001000000"
 
 Catalog:
 
@@ -120,8 +119,9 @@ class OkaybuyItemMiner(bee.Miner):
 
 def gen_job_rules(store_name='okaybuy'):
     okaybuy_encoding = 'gb2312'
+    okaybuy_seed_url = "http://www.okaybuy.com.cn/list.php?code=001000000"
     okaybuy_seeker_rules = [
-        ['^http://www.okaybuy.com.cn/list.php?code=\d+&gender=\d&curpage=\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
+        ['^http://www.okaybuy.com.cn/list.php\?code=001\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
         ['^http://www.okaybuy.com.cn/com/\d+.html$', 201, 86400, "simple_http_get", [], ["okaybuy_item_miner"], False,],
     ]
     okaybuy_job_rules = {
@@ -189,21 +189,13 @@ def gen_job_rules(store_name='okaybuy'):
         },
         "seed_tasks": [
             {
-                "url": 'http://www.okaybuy.com.cn/list.php?code=001000000&gender=1',
+                "url": okaybuy_seed_url,
                 "fetcher": "simple_http_get",
                 "seekers": ["okaybuy_cat_seeker"], 
                 "miners": [],
                 "hop": 0,
                 "revisit_interval": 14400,
             },
-            {
-                "url": 'http://www.okaybuy.com.cn/list.php?code=001000000&gender=2',
-                "fetcher": "simple_http_get",
-                "seekers": ["okaybuy_cat_seeker"], 
-                "miners": [],
-                "hop": 0,
-                "revisit_interval": 14400,
-            }
         ],
     }
 

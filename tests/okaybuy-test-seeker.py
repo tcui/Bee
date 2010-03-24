@@ -5,10 +5,10 @@ import logging
 
 import bee
 
-seed_url = "http://www.okaybuy.com.cn/list.php?code=001000000&gender=1"
+seed_url = "http://www.okaybuy.com.cn/list.php?code=001000000"
 
 rules = [
-        ['^http://www.okaybuy.com.cn/list.php?code=\d+&gender=\d&curpage=\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
+        ['^http://www.okaybuy.com.cn/list.php\?code=001\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
         ['^http://www.okaybuy.com.cn/com/\d+.html$', 201, 86400, "simple_http_get", [], ["okaybuy_item_miner"], False,],
 ]
 
