@@ -7,11 +7,13 @@ Customized parsers for okaybuy
 
 initial seed:
 
-"http://www.okaybuy.com.cn/list.php?code=001000000"
+# "all shoes -> ordery be new"
+
+"http://www.okaybuy.com.cn/list.php?code=001000000&odrby=new"
 
 Catalog:
 
-http://www.okaybuy.com.cn/list.php?code=001000000&gender=1&curpage=8
+http://www.okaybuy.com.cn/list.php?code=001000000&odrby=new&curpage=1
 
 Detail page:
 
@@ -119,15 +121,15 @@ class OkaybuyItemMiner(bee.Miner):
 
 def gen_job_rules(store_name='okaybuy'):
     okaybuy_encoding = 'gb2312'
-    okaybuy_seed_url = "http://www.okaybuy.com.cn/list.php?code=001000000"
+    okaybuy_seed_url = "http://www.okaybuy.com.cn/list.php?code=001000000&odrby=new&curpage=1"
     okaybuy_seeker_rules = [
-        ['^http://www.okaybuy.com.cn/list.php\?code=001\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
+        ['^http://www.okaybuy.com.cn/list.php\?code=001000000&odrby=new&curpage=\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
         ['^http://www.okaybuy.com.cn/com/\d+.html$', 201, 86400, "simple_http_get", [], ["okaybuy_item_miner"], False,],
     ]
     okaybuy_job_rules = {
         "desc": "Crawling job for %s" % (store_name,),
         "name": store_name,
-        "num_workers": 3,
+        "num_workers": 2,
         "worker_params": {
             "max_crawler_failed_cnt": 3, 
             "max_crawler_timeout": 30, 

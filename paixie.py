@@ -108,7 +108,7 @@ def gen_job_rules(store_name='paixie'):
     paixie_job_rules = {
         "desc": "Crawling job for %s" % (store_name,),
         "name": store_name,
-        "num_workers": 3,
+        "num_workers": 2,
         "worker_params": {
             "max_crawler_failed_cnt": 3, 
             "max_crawler_timeout": 30, 
