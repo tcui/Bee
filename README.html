@@ -1,0 +1,820 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.5: http://docutils.sourceforge.net/" />
+<title>Bee -- 小蜜蜂</title>
+<meta name="author" content="ted&#64;tcui.org" />
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 5196 2007-06-03 20:25:28Z wiemann $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+
+See http://docutils.sf.net/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left {
+  clear: left }
+
+img.align-right {
+  clear: right }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font-family: serif ;
+  font-size: 100% }
+
+pre.literal-block, pre.doctest-block {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="bee">
+<h1 class="title">Bee -- 小蜜蜂</h1>
+<table class="docinfo" frame="void" rules="none">
+<col class="docinfo-name" />
+<col class="docinfo-content" />
+<tbody valign="top">
+<tr><th class="docinfo-name">Author:</th>
+<td><a class="first last reference external" href="mailto:ted&#64;tcui.org">ted&#64;tcui.org</a></td></tr>
+<tr class="field"><th class="docinfo-name">Created:</th><td class="field-body">2010/03/24</td>
+</tr>
+<tr class="field"><th class="docinfo-name">Source:</th><td class="field-body">README</td>
+</tr>
+</tbody>
+</table>
+<div class="contents topic" id="table-of-contents">
+<p class="topic-title first">Table of Contents</p>
+<ul class="auto-toc simple">
+<li><a class="reference internal" href="#overview" id="id1">1&nbsp;&nbsp;&nbsp;Overview</a></li>
+<li><a class="reference internal" href="#running-the-bee" id="id2">2&nbsp;&nbsp;&nbsp;Running the Bee</a><ul class="auto-toc">
+<li><a class="reference internal" href="#environment-requirements" id="id3">2.1&nbsp;&nbsp;&nbsp;Environment Requirements</a></li>
+<li><a class="reference internal" href="#re-run-the-crawler" id="id4">2.2&nbsp;&nbsp;&nbsp;Re-run the crawler</a></li>
+<li><a class="reference internal" href="#logging" id="id5">2.3&nbsp;&nbsp;&nbsp;Logging</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#notes-for-configuration-and-future-developments" id="id6">3&nbsp;&nbsp;&nbsp;Notes for Configuration and Future Developments</a><ul class="auto-toc">
+<li><a class="reference internal" href="#integration" id="id7">3.1&nbsp;&nbsp;&nbsp;Integration</a></li>
+<li><a class="reference internal" href="#writing-new-crawlers" id="id8">3.2&nbsp;&nbsp;&nbsp;Writing new crawlers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#design-notes-for-the-bee" id="id9">4&nbsp;&nbsp;&nbsp;Design Notes for the Bee</a><ul class="auto-toc">
+<li><a class="reference internal" href="#taskdescription" id="id10">4.1&nbsp;&nbsp;&nbsp;TaskDescription</a></li>
+<li><a class="reference internal" href="#taskqueue" id="id11">4.2&nbsp;&nbsp;&nbsp;TaskQueue</a></li>
+<li><a class="reference internal" href="#worker" id="id12">4.3&nbsp;&nbsp;&nbsp;Worker</a></li>
+<li><a class="reference internal" href="#fetcher" id="id13">4.4&nbsp;&nbsp;&nbsp;Fetcher</a></li>
+<li><a class="reference internal" href="#page" id="id14">4.5&nbsp;&nbsp;&nbsp;Page</a></li>
+<li><a class="reference internal" href="#linkdb" id="id15">4.6&nbsp;&nbsp;&nbsp;LinkDB</a></li>
+<li><a class="reference internal" href="#seeker" id="id16">4.7&nbsp;&nbsp;&nbsp;Seeker</a></li>
+<li><a class="reference internal" href="#miner" id="id17">4.8&nbsp;&nbsp;&nbsp;Miner</a></li>
+<li><a class="reference internal" href="#output" id="id18">4.9&nbsp;&nbsp;&nbsp;Output</a></li>
+<li><a class="reference internal" href="#job" id="id19">4.10&nbsp;&nbsp;&nbsp;Job</a></li>
+<li><a class="reference internal" href="#beautifulsoup" id="id20">4.11&nbsp;&nbsp;&nbsp;BeautifulSoup</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>如果想尽快体验“小蜜蜂”，请直接跳至 <a class="reference internal" href="#running-the-bee">Running the Bee</a></p>
+<div class="section" id="overview">
+<h1><a class="toc-backref" href="#id1">1&nbsp;&nbsp;&nbsp;Overview</a></h1>
+<p>Bee (小蜜蜂) 是一个灵活小巧的定向爬虫。具有高度的可配置性和扩展性。
+与通用的网页爬虫相比，定向爬虫需要解决的问题有：</p>
+<ul class="simple">
+<li>定向 focus on certain areas of a site: you do not want to retrieve every
+single pages of the target site. Most likely, you only want to visit product
+catalog pages and product details pages</li>
+<li>爬行路径 crawling depth and crawling path: since you want to harvest complete
+product catalogs, the crawler will need to &quot;page&quot; through all catalog pages.
+In other words, the crawler can go very deep into the site. On modern
+shopping sites, the catalog pages are actually backed by &quot;search&quot;.  That
+means that there are hundreds of ways to represent the catalog. The crawler
+could get into infinite loops, if crawling path is not controlled carefully.
+The crawling process in Bee is controlled by Seeker class. Its sub-class
+RuleBasedSeeker is a pretty generic abstraction. You can define you crawling
+paths by feeding it some simple rules. In extreme cases, you may need to
+sub-class it to implement more sophisticated crawling controls.</li>
+<li>内容萃取 details extraction: Unfortunately, there is no good generic way to
+extract structural data from web pages. In the Bee package, the base class
+Miner does not really do anything, the developers need to develop dedicated
+Miners for each sites. The good news is that web sites do not change their
+layouts very often. If you write the Miner carefully, it can even tolerate
+minor changes. For example, all Taobao stores can share the same Miner class.
+There are many techniques can be used to extract information from web pages,
+for example, DOM, XPath, Regex, CSS selector etc.</li>
+</ul>
+<p>Since the Bee is a crawler, it also covers functions that are required for
+any good general purpose crawlers.</p>
+<ul class="simple">
+<li>concurrency control: controlled by the number of worker thread, configurable
+in Job rules</li>
+<li>rate control: simple &quot;pause&quot; can be configured in Job rules.</li>
+<li>re-visit control: do not revisit the page if it has been visited in the past
+N seconds</li>
+<li>HTTP related: USER_AGENT, proxy, authentication, GET/POST. These
+are handled by Fetcher, its sub-class SimpleHTTPFetcher is good
+for most HTTP/GET accesses.</li>
+<li>encoding: you can relies on BeautifulSoup to detect the correct encoding,
+which often got wrong on Chinese sites. It is better to specify it in the Job
+rule configuration. For example, okaybuy.com.cn is a nasty one. It declares
+its encoding as &quot;zh-CN&quot;, but it pages contain invalid characters in it.  I
+have to patch BeautifulSoup and picked &quot;gb2312&quot; for it.</li>
+<li>detecting site changes: It is actually quite difficult than it sounds.
+For small sites, we can afford to fully re-crawl them daily. For larger sites,
+the typical strategy is to run multiple crawler, one or a few more frequent
+small shallow crawling jobs plus one less frequent full crawl job.</li>
+</ul>
+</div>
+<div class="section" id="running-the-bee">
+<h1><a class="toc-backref" href="#id2">2&nbsp;&nbsp;&nbsp;Running the Bee</a></h1>
+<div class="section" id="environment-requirements">
+<h2><a class="toc-backref" href="#id3">2.1&nbsp;&nbsp;&nbsp;Environment Requirements</a></h2>
+<div class="section" id="python">
+<h3>2.1.1&nbsp;&nbsp;&nbsp;Python</h3>
+<p>The Bee is developed and tested with Python 2.6.4 on Mac OS X (BSD). It should
+be able to run on any os with recent version of Python. The following
+instructions are for Linux alike environments. Shell commands should be
+adjusted accordingly if running under Windows. All command scripts were created
+with +x option, so they can be started with command line such as:</p>
+<pre class="literal-block">
+./taobao-crawler.py
+</pre>
+<p>You can also specify the Python interpreter explicitly as:</p>
+<pre class="literal-block">
+python taobao-crawler.py
+</pre>
+<p>Python can be obtained from <a class="reference external" href="http://python.org">http://python.org</a></p>
+<p>Python is a very friendly language. Its syntax is very close to the pseudo
+languages that you have seen in many computer books. You can understand it
+perfectly without formally learning it. I started writing Python programs
+before reading any tutorials. As a matter of facts, I have never finished
+reading my &quot;Learning Python&quot; book :-)  So, don't be scared</p>
+<p>First of all, please unpack and copy the package to your disk. Assume you
+dropped the package at $HOME/bee directory.</p>
+</div>
+<div class="section" id="pythonpath">
+<h3>2.1.2&nbsp;&nbsp;&nbsp;PYTHONPATH</h3>
+<p>Then you need to set up environment variable PYTHONPATH</p>
+<pre class="literal-block">
+export PYTHONPATH=$HOME/bee
+</pre>
+<p>Now, you can verify your installation by running one of the tests</p>
+<pre class="literal-block">
+$ export PYTHONPATH=$HOME/bee
+$ cd ~/bee/tests
+$ ./bee-test-1.py
+</pre>
+<p>If you see some lines without any errors, then you are good to go. Don't
+worry about the meaning of the messages yet.</p>
+</div>
+<div class="section" id="start-one-crawler">
+<h3>2.1.3&nbsp;&nbsp;&nbsp;Start One Crawler</h3>
+<p>Then, lets try to crawl one of small Taobao store:</p>
+<pre class="literal-block">
+$ cd ~/bee/crawlers/
+$ ./taobao-crawler.py carephilly
+2010-03-24 16:08:22,807 [INFO] [bee.py:1055] Starting up the crawling job
+2010-03-24 16:08:22,809 [INFO] [bee.py:752] Worker started
+2010-03-24 16:08:22,810 [INFO] [bee.py:752] Worker started
+2010-03-24 16:08:22,810 [INFO] [bee.py:1058] Waiting job to be done
+2010-03-24 16:08:22,810 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(0, pending:1), Links:(0, succ:0, fail:0), Output: 0
+2010-03-24 16:08:25,811 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(1, pending:0), Links:(1, succ:0, fail:0), Output: 0
+2010-03-24 16:08:28,811 [INFO] [bee.py:1062] idle_cnt: 1, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:1, fail:0), Output: 0
+2010-03-24 16:08:31,825 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:1, fail:0), Output: 0
+2010-03-24 16:08:34,826 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:3, fail:0), Output: 0
+2010-03-24 16:08:37,830 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:3, fail:0), Output: 1
+2010-03-24 16:08:40,853 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:4, fail:0), Output: 1
+2010-03-24 16:08:43,911 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:5, fail:0), Output: 2
+</pre>
+<p>Now it start crawling the 'carephilly' 卡芙琳 store. When it is ended it will
+show</p>
+<pre class="literal-block">
+2010-03-24 16:18:01,631 [INFO] [bee.py:1062] idle_cnt: 2, Workers: 2, Tasks:(958, pending:0), Links:(132, succ:132, fail:0), Output: 120
+2010-03-24 16:18:01,631 [INFO] [bee.py:1066] idle_cnt 3 reached max, prepare to stop
+2010-03-24 16:18:01,631 [INFO] [bee.py:1076] preparing to stop job
+2010-03-24 16:18:01,662 [INFO] [bee.py:767] Worker ended
+2010-03-24 16:18:01,702 [INFO] [bee.py:767] Worker ended
+2010-03-24 16:18:01,703 [INFO] [bee.py:1079] Job is done
+</pre>
+<p>Accessing Taobao from my laptop is really slow, it took about 10 minutes
+to finish downloading the 120 products with 2 worker threads.</p>
+</div>
+<div class="section" id="observing-progress-job-status-line">
+<h3>2.1.4&nbsp;&nbsp;&nbsp;Observing Progress -- job status line</h3>
+<p>Every 3 seconds, the crawler prints a status line to show its progress:</p>
+<pre class="literal-block">
+idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:5, fail:0), Output: 2
+</pre>
+<ul class="simple">
+<li>idle_cnt: it becomes non-zero when the task queue becomes empty</li>
+<li>Workers: the number of worker threads</li>
+<li>Tasks: crawling tasks status. (Workers work these tasks :-)<ul>
+<li>the first number is the number of tasks that have been finished</li>
+<li>pending: the number of tasks waiting to be done</li>
+</ul>
+</li>
+<li>Links: the status of link access<ul>
+<li>the first number is the number of link access attempts (mostly HTTP GET)</li>
+<li>succ: the number of times that the contents of the link has been downloaded successfully</li>
+<li>fail: the number of times that the crawler had difficulties to open the link</li>
+</ul>
+</li>
+<li>Output: the number of product descriptions that have been extracted since
+started</li>
+</ul>
+<p>While you are running the crawler, beside aforementioned status log lines, you
+can also observe the progress in other ways</p>
+</div>
+<div class="section" id="observing-progress-xxx-prod-json">
+<h3>2.1.5&nbsp;&nbsp;&nbsp;Observing progress -- xxx.prod.json</h3>
+<p>First, you can tail the xx.prod.json file to watch what products that have been
+found by the crawler.  There is one ascii_safe JSON string line for each
+product.</p>
+<p>It is more readable with the help of &quot;print_json.py&quot; script.</p>
+<pre class="literal-block">
+$ tail -f taobao.carephilly.prod.json | ./print_json.py
+Line 1: {
+    &quot;prod_price&quot;: &quot;188.00&quot;,
+    &quot;shipping_cost&quot;: 0.0,
+    &quot;url&quot;: &quot;http://item.taobao.com/auction/item_detail-0db2-d6a34a97fc369709c69ccc0bacb80d2e.htm&quot;,
+    &quot;prod_img_s_3&quot;: &quot;http://img01.taobaocdn.com/imgextra/i1/91892992/T244XaXblXXXXXXXXX_!!91892992.jpg_40x40.jpg&quot;,
+    &quot;sku_url&quot;: &quot;http://item.taobao.com/spu-89741729-4453893344-1.htm&quot;,
+    &quot;prod_img_s_4&quot;: &quot;http://img01.taobaocdn.com/imgextra/i1/91892992/T26NXaXbdXXXXXXXXX_!!91892992.jpg_40x40.jpg&quot;,
+    &quot;prod_details&quot;: [
+        {
+            &quot;attr_name&quot;: &quot;货号&quot;,
+            &quot;attr_value&quot;: &quot;货号:CL9905-2&quot;
+        },
+        {
+            &quot;attr_name&quot;: &quot;品牌&quot;,
+            &quot;attr_value&quot;: &quot;品牌:Caerphilly/卡芙琳&quot;
+        },
+</pre>
+</div>
+<div class="section" id="observing-progress-xxx-link-db-and-xxx-task-db">
+<h3>2.1.6&nbsp;&nbsp;&nbsp;Observing Progress -- xxx.link.db and xxx.task.db</h3>
+<p>The crawler also creates xxx.link.db and xxx.task.db. They are sqlite3 database
+files.  BTW, sqlite is used in every Firefox browser and iPod. So it is nothing
+new. It is pretty handy for small application. <a class="reference external" href="http://www.sqlite.org/docs.html">http://www.sqlite.org/docs.html</a></p>
+<p>The two databases are used to preserve job status. So you can stop and restart
+the crawler without losing progresses.</p>
+<p>To tail the latest tasks:</p>
+<pre class="literal-block">
+sqlite3 taobao.carephilly.task.db &quot;select * from tasks order by ROWID desc limit 5&quot;
+</pre>
+<p>The tasks table become empty when all crawling tasks finished.</p>
+<p>To tail the latest links that are discovered:</p>
+<pre class="literal-block">
+sqlite3 taobao.carephilly.link.db &quot;select * from links order by ROWID desc limit 5&quot;
+</pre>
+<p>To start other crawlers, please use following command</p>
+<pre class="literal-block">
+./taobao-crawler.py carephilly
+./taobao-crawler.py maizhongfs.mall
+./taobao-crawler.py gracegift
+./okaybuy-crawler.py
+./paixie-crawler.py
+</pre>
+<p>'paixie' has 11677 shoes. It takes a couple of hours with 2 workers running from US.
+It might be faster when running from China. You can also modify the configuration file
+to increase the number or workers. But please be polite to not bring down their site.</p>
+</div>
+</div>
+<div class="section" id="re-run-the-crawler">
+<h2><a class="toc-backref" href="#id4">2.2&nbsp;&nbsp;&nbsp;Re-run the crawler</a></h2>
+<p>The default policy allows to re-crawl the catalog pages not sooner than 4
+hours; for product detail pages, the limit is 24-hours.  Right after one pass
+of crawl, if you restart the crawler again, it will not do any thing and quite
+pretty soon.</p>
+<p>If you want to force it to re-crawl from scratch, please remove the xxx.db
+files that are owned by the crawlers. There are two db files for each crawlers,
+one for linkdb and another one for task queue.</p>
+</div>
+<div class="section" id="logging">
+<h2><a class="toc-backref" href="#id5">2.3&nbsp;&nbsp;&nbsp;Logging</a></h2>
+<p>Feel free to put the crawler in background and pipe the log to log file. You can also
+alter the crawler script to point the log to file and adjust logging level.</p>
+</div>
+</div>
+<div class="section" id="notes-for-configuration-and-future-developments">
+<h1><a class="toc-backref" href="#id6">3&nbsp;&nbsp;&nbsp;Notes for Configuration and Future Developments</a></h1>
+<div class="section" id="integration">
+<h2><a class="toc-backref" href="#id7">3.1&nbsp;&nbsp;&nbsp;Integration</a></h2>
+<p>Currently, the default JSONDumper outputs the production description as JSON strings in
+text files. There are two ways to integrate the crawler with other parts of the system</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Subclass the Output class, writes to the target storage directly</li>
+<li>&quot;tail&quot; the json file, pipe to other applications that update the target storage.</li>
+</ol>
+</blockquote>
+<p>The second solution probably is easier to test and debug.</p>
+<p>One thing to be aware is that one product can be outputted multiple times depends on
+the re-crawl policy. The Bee does not detect page changes, it simply re-crawl the page
+when it is timed out. The downstream applications are responsible of determining whether
+to insert new products or update existing products.</p>
+</div>
+<div class="section" id="writing-new-crawlers">
+<h2><a class="toc-backref" href="#id8">3.2&nbsp;&nbsp;&nbsp;Writing new crawlers</a></h2>
+<p>Writing new crawler is not difficult if you are familiar with html DOM, regex and Python.</p>
+<div class="section" id="step-1-determine-crawling-paths-and-seeker-rules">
+<h3>3.2.1&nbsp;&nbsp;&nbsp;Step 1: determine crawling paths and Seeker Rules</h3>
+<p>Typically, most sites can be crawled by &quot;search all&quot; or &quot;search new goods&quot;.
+Take Taobao as an example, I picked &quot;所有宝贝&quot;, because the stores are small,
+each store only has up to a few hundreds of products</p>
+<pre class="literal-block">
+http://gracegift.taobao.com/?price1=&amp;price2=&amp;search=y&amp;pageNum=1&amp;scid=0&amp;keyword=&amp;orderType=_time&amp;old_starts=&amp;categoryp=&amp;pidvid=&amp;viewType=list&amp;isNew=&amp;ends=
+</pre>
+<p>Then you determine the regex for &quot;next pages&quot; and product detail page. Then, write
+a simple test script to them try out, for example taobao-test-seeker.py</p>
+<p>paixie.net is pretty easy, its website is clean.</p>
+<p>okaybuy.com.cn is a little more difficult, it has non-shoe products and multiple
+search entry links on the page. I finally tight down the regex to only focus on
+code=001000000 and odrby=new. The initial seed is</p>
+<pre class="literal-block">
+http://www.okaybuy.com.cn/list.php?code=001000000&amp;odrby=new&amp;curpage=1&quot;
+</pre>
+<p>The seeker rules are</p>
+<pre class="literal-block">
+[
+  ['^http://www.okaybuy.com.cn/list.php\?code=001000000&amp;odrby=new&amp;curpage=\d+', 200, 14400, &quot;simple_http_get&quot;, [&quot;okaybuy_cat_seeker&quot;], [], False,],
+  ['^http://www.okaybuy.com.cn/com/\d+.html$', 201, 86400, &quot;simple_http_get&quot;, [], [&quot;okaybuy_item_miner&quot;], False,],
+]
+</pre>
+<ul class="simple">
+<li>The first rule means only follow &quot;search shoes - order by new products - page N&quot;.<ul>
+<li>200: allows the seeker to go down 200 hops deep. It is actually too
+high, since each search page has links to next 10 pages, 200 hops can
+exhaust 2000 search result pages.</li>
+<li>14400: do not revisit the same search result page withing 4 hours.</li>
+<li>&quot;simple_http_get&quot;: it is the name of Fetcher to be used in next step</li>
+<li>[&quot;okaybuy_cat_seeker&quot;]: it defines that the next step only run one Seeker,
+&quot;okaybuy_cat_seeker&quot; on the page,</li>
+<li>[]: no Miner will be invoked.  We do not want to run Miner on the search
+result page</li>
+<li>False: it should continue evaluate the next Seeker rule</li>
+</ul>
+</li>
+<li>The second rule defines how to generate next crawl task for product detail pages<ul>
+<li>201: it can go up to 201 hops deep. It should be at least 1 hop deeper than
+the max seeker hops.</li>
+<li>86400: only revisit the product detail page every 24 hours.</li>
+<li>[]: no Seeker will be invoked on product detail page</li>
+<li>[&quot;okaybuy_item_miner&quot;]: only one Miner will be invoked.</li>
+<li>False: continue evaluate next rule</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="step-2-develop-miner">
+<h3>3.2.2&nbsp;&nbsp;&nbsp;Step 2: Develop Miner</h3>
+<p>Miner has be to developed for each site :-(</p>
+<p>Typically you can download the page to view the source. One thing to be aware
+is that the SimpleHTTPFetcher class does not execute JavaScript. You can use
+bee-test-0.py to dump the page. Alternatively, you can use &quot;wget&quot; or &quot;curl&quot;.</p>
+<p>FireFox browser has a plug-in called FireBug.
+<a class="reference external" href="https://addons.mozilla.org/en-US/firefox/addon/1843">https://addons.mozilla.org/en-US/firefox/addon/1843</a> It helps you to find the
+corresponding html source for the any given elements on the page. It is a very
+useful to analyze how to extract the information.</p>
+<p>Then, you can start writing the Miner class by copying one of the existing
+Miner classes. The OkaybuyItemMiner in okaybuy.py is one of the examples.</p>
+<p>It is also recommended to write a simple test script to try it out. You can
+start from an empty Miner class, then add one attribute at a time. For example
+tests-okaybuy-seeker.py</p>
+<p>BTW, the Miner.extract() interface allows you to extract multiple products from
+one page.</p>
+</div>
+<div class="section" id="step-3-write-the-job-rule">
+<h3>3.2.3&nbsp;&nbsp;&nbsp;Step 3: write the Job Rule</h3>
+<p>The job rule glues all pieces together. I used a simple method,
+gen_job_rules(), in each crawler to construct Job rules. You can actually write
+them as external JSON file then load them when starting the crawling job.</p>
+<p>Typically, you can make a copy of one of existing one and then update
+&quot;encoding&quot;, &quot;seed_url&quot; and &quot;seeker_rules&quot;.</p>
+<div class="section" id="components-in-job-rule">
+<h4>3.2.3.1&nbsp;&nbsp;&nbsp;Components in Job Rule</h4>
+<p>&quot;class_name&quot; parameter defines which implementation class to be used for
+certain components.</p>
+<p>&quot;params&quot; defines optional parameters to be passed into the constructor of the
+aforementioned class.</p>
+<p>The whole crawling job is like a car, you can use different kinds of tires as
+long as they fit the interfaces. For example, &quot;bee&quot; provided two
+implementations for TaskQueue, DBTaskQueue and MemTaskQueue. MemTaskQueue is
+faster than DBTaskQueue.  However, if you stop the crawler process in the
+middle, MemTaskQueue will lose all pending tasks that are still in queue. On
+the contrary, the DBTaskQueue uses sqlite database to persist the contents of
+the task queue, it allows you to stop and restart the crawler at any point of
+time. Similarly, you can implement TaskQueue based on MySQL server or some
+kinds of messaging queue, then you can actually run the crawling job from
+multiple machines.</p>
+</div>
+<div class="section" id="seed-tasks">
+<h4>3.2.3.2&nbsp;&nbsp;&nbsp;Seed Tasks</h4>
+<p>Seek tasks will be inserted into task queue when the job started. You can describe
+multiple seed tasks in that section. But in most cases, you only need one.</p>
+<p>On the other extreme end, if you only want to grab a few specific pages, you can
+define all of them as seed tasks, and use very small max_hop value in seeker rule,
+or only define Miner tasks.</p>
+</div>
+</div>
+<div class="section" id="step-4-put-them-together">
+<h3>3.2.4&nbsp;&nbsp;&nbsp;Step 4: Put Them Together</h3>
+<p>Create a new package file, such as taobao.py; put your Job Rule template and Miner
+class in it; write as simple start up script, such as crawlers/taobao-crawler.py</p>
+</div>
+<div class="section" id="step-5-test">
+<h3>3.2.5&nbsp;&nbsp;&nbsp;Step 5: Test</h3>
+<p>Run it. Observe if there are any errors. You may need to adjust your Miner class
+and Seeker rules.</p>
+<p>You can also lower the logging level to DEBUG to see more detailed information.</p>
+<p>You could also observe xxx.prod.json, xxx.link.db and xxx.task.db</p>
+<p>But most importantly, the job status log line. The first thing you want to
+avoid is that the crawler visited a lot of links but only find very few
+products. If the number of pending tasks grows too rapidly, it is also not a
+good sign. The best way to debug is to stop the crawler and check the content
+in link.db and task.db</p>
+<p>Once you have finalized your design, you can increase the number of workers
+based on the size of the site. Then reset link.db and task.db.</p>
+<p>Now, start your crawler and have fun :-)</p>
+</div>
+</div>
+</div>
+<div class="section" id="design-notes-for-the-bee">
+<h1><a class="toc-backref" href="#id9">4&nbsp;&nbsp;&nbsp;Design Notes for the Bee</a></h1>
+<p>The structure of the Bee is quite simple. It is self-programming auto machine.</p>
+<div class="section" id="taskdescription">
+<h2><a class="toc-backref" href="#id10">4.1&nbsp;&nbsp;&nbsp;TaskDescription</a></h2>
+<p>Task is described by a dictionary</p>
+<pre class="literal-block">
+{
+    &quot;url&quot;: url,
+    &quot;revisit_interval&quot;: revisit_interval,
+    &quot;fetcher&quot;: next_fetcher,
+    &quot;seekers&quot;: next_seekers,
+    &quot;miners&quot;: next_miners,
+    &quot;hop&quot;: hop,
+}
+</pre>
+<p>It is stored as JSON string in the task queue. Tasks are created by you in the
+Job Rule as the seed tasks or by the Seeker.</p>
+<p>The Tasks are executed by Workers.</p>
+</div>
+<div class="section" id="taskqueue">
+<h2><a class="toc-backref" href="#id11">4.2&nbsp;&nbsp;&nbsp;TaskQueue</a></h2>
+<p>TaskQueue holds TaskDescription. There is only one instance of TaskQueue for
+one crawling job. If the TaskQueue instance is accessible from multiple
+machines, then the crawling job can be distributed onto multiple machines.</p>
+<ul class="simple">
+<li>Worker pop up tasks from its head</li>
+<li>Seeker generates new tasks to make the crawler go further into the site</li>
+<li>Worker push new tasks into the TaskQueue on the behalf of the Seeker</li>
+<li>Worker can also re-queue tasks for certain error conditions</li>
+</ul>
+<p>There are two implementations: MemTaskQueue and DBTaskQueue</p>
+</div>
+<div class="section" id="worker">
+<h2><a class="toc-backref" href="#id12">4.3&nbsp;&nbsp;&nbsp;Worker</a></h2>
+<p>It is the driving force for the Bee.</p>
+<ul class="simple">
+<li>It pops up tasks from the head of the TaskQueue</li>
+<li>It checks the LinkDB to determine whether to visit/revisit the given
+url.</li>
+<li>It also handles the error-defer-retry logic by re-queuing tasks.</li>
+<li>It calls Fetcher to retrieve page.</li>
+<li>It feeds the Page object to all Seekers and all Miners that are
+described by the task description.</li>
+<li>It pushes new tasks that are generated by Seekers into the TaskQueue.</li>
+<li>It writes products that are extracted by Miners into the Output.</li>
+<li>It keeps looping until stop() is invoked</li>
+</ul>
+<p>Job can start multiple Worker instances on one or multiple machines.</p>
+</div>
+<div class="section" id="fetcher">
+<h2><a class="toc-backref" href="#id13">4.4&nbsp;&nbsp;&nbsp;Fetcher</a></h2>
+<p>The Fetcher is responsible of accessing Internet. For given url, it returns
+Page object.</p>
+<p>The Bee provides one Fetcher implementation SimpleHTTPFetcher.</p>
+</div>
+<div class="section" id="page">
+<h2><a class="toc-backref" href="#id14">4.5&nbsp;&nbsp;&nbsp;Page</a></h2>
+<p>Page holds the data that has been retrieved from the Internet. The Bee provides
+one implementation, HTMLPage.</p>
+<ul class="simple">
+<li>url: the final url that the HTTP request landed.</li>
+<li>data: holds the raw data from the Internet</li>
+<li>soup: holds the data that has been parsed by BeautifulSoup</li>
+</ul>
+</div>
+<div class="section" id="linkdb">
+<h2><a class="toc-backref" href="#id15">4.6&nbsp;&nbsp;&nbsp;LinkDB</a></h2>
+<p>It holds status and access history of links. The Bee provides one
+implementation, SqliteLinkDB.</p>
+</div>
+<div class="section" id="seeker">
+<h2><a class="toc-backref" href="#id16">4.7&nbsp;&nbsp;&nbsp;Seeker</a></h2>
+<p>It is responsible of looking for new paths and generate new tasks. New Seeker
+tasks to crawler further or new Seeker tasks to extract products.</p>
+<p>The Bee provides one implementation, RuleBasedSeeker, which is driven by seeker
+rules. The format of seeker rule has been described in previous chapters.</p>
+<p>While the RulBasedSeeker is already very powerful, you may still need to
+develop new Seeker implementations for very difficult sites.</p>
+</div>
+<div class="section" id="miner">
+<h2><a class="toc-backref" href="#id17">4.8&nbsp;&nbsp;&nbsp;Miner</a></h2>
+<p>The Miner extracts structured information from page. It has to be customized
+for each site.</p>
+</div>
+<div class="section" id="output">
+<h2><a class="toc-backref" href="#id18">4.9&nbsp;&nbsp;&nbsp;Output</a></h2>
+<p>It is the channel where the Worker pushes the final products. The Bee provides
+one implementation, JSONDumper.</p>
+</div>
+<div class="section" id="job">
+<h2><a class="toc-backref" href="#id19">4.10&nbsp;&nbsp;&nbsp;Job</a></h2>
+<ul class="simple">
+<li>It reads the Job Rule.</li>
+<li>Initializes all data structures:<ul>
+<li>TaskQueue</li>
+<li>LinkDB</li>
+<li>Output</li>
+<li>FetcherFactory</li>
+<li>SeekerFactory</li>
+<li>MinerFactory</li>
+</ul>
+</li>
+<li>Feeds seed tasks into the TaskQueue</li>
+<li>Creates Workers and start workers in worker threads</li>
+<li>It then wait the job to be done, which is<ul>
+<li>TaskQueue empty</li>
+<li>No more new tasks coming</li>
+</ul>
+</li>
+<li>Meanwhile, it print status lines to logging device when it has chance</li>
+</ul>
+</div>
+<div class="section" id="beautifulsoup">
+<h2><a class="toc-backref" href="#id20">4.11&nbsp;&nbsp;&nbsp;BeautifulSoup</a></h2>
+<p>It is a wonderful package for parsing HTML/XML. It can be found here
+<a class="reference external" href="http://www.crummy.com/software/BeautifulSoup/documentation.html">http://www.crummy.com/software/BeautifulSoup/documentation.html</a></p>
+<p>There is one version included in the Bee package. It is a patched version
+that tolerates encoding errors.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
