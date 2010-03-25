@@ -8,8 +8,8 @@ import bee
 def test_seeker_1(logger):
     kwarg = {
         "rules": [
-            [ ".*/cat\d+\.html", 3, "simple_http_get", ["simple_seek"], [], False ],
-            [ ".*prod\d+\.html", 1, "simple_http_get", [], ["simple_miner"], False ],
+            [ ".*/cat\d+\.html", 3, 60, "simple_http_get", ["simple_seek"], [], False ],
+            [ ".*prod\d+\.html", 1, 3600, "simple_http_get", [], ["simple_miner"], False ],
         ]
     }
 

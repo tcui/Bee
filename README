@@ -4,6 +4,9 @@ Bee -- 小蜜蜂 -- 采花于 Internet
 
 :Author: ted@tcui.org
 :Created: 2010/03/24
+:Source: README
+
+如果想尽快体验“小蜜蜂”，请直接调至 `Running the Bee`_
 
 =============
 Overview
@@ -12,28 +15,28 @@ Overview
 Bee (小蜜蜂) 是一个灵活小巧的定向爬虫。具有高度的可配置性和扩展性。
 与通用的网页爬虫相比，定向爬虫需要解决的问题有：
 
-- focus on certain areas of a site: you do not want to retrieve every single
-  page of a site. Most likely, you only want to visit product catalog pages and
-  product details pages
-- crawling depth and crawling path: since you want to harvest complete product
-  catalogs, the crawler will need to "page" through all catalog pages. In other 
-  words, the crawler can go very deep into the site. On modern shopping sites,
-  catalog pages are actually backed by "search" functions, which means there
-  are hundreds of ways to represent the catalog. The crawler could get into
-  infinite loops, if crawling path is not controlled carefully. The crawling
-  process in Bee is controlled by Seeker class. Its sub-class RuleBasedSeeker
-  is a pretty generic abstraction. You can define you crawling paths by
-  feeding it some simple rules. In extreme cases, you may need to sub-class
-  it to implement more sophisticated crawling controls.
-- details extractions: Unfortunately, there is no good generic way to extract
-  structural data from the page. In the Bee package, the base class Miner
-  does not really do anything, the developers need to develop write dedicated
-  Miner for each sites. The good news is that web site does not change their 
-  layout very often. If you write your Miner carefully, it can even tolerate 
-  minor changes. For example, all Taobao store can almost share the same 
-  Miner class. There are may techniques can be used, such as DOM, XPath,
-  Regex etc. You can even pickup the "url" output by the base Miner class
-  and use other applications to download and parse the page.
+- 定向 focus on certain areas of a site: you do not want to retrieve every
+  single page of a site. Most likely, you only want to visit product catalog
+  pages and product details pages
+- 爬行路径 crawling depth and crawling path: since you want to harvest complete
+  product catalogs, the crawler will need to "page" through all catalog pages.
+  In other words, the crawler can go very deep into the site. On modern
+  shopping sites, catalog pages are actually backed by "search" functions,
+  which means there are hundreds of ways to represent the catalog. The crawler
+  could get into infinite loops, if crawling path is not controlled carefully.
+  The crawling process in Bee is controlled by Seeker class. Its sub-class
+  RuleBasedSeeker is a pretty generic abstraction. You can define you crawling
+  paths by feeding it some simple rules. In extreme cases, you may need to
+  sub-class it to implement more sophisticated crawling controls.
+- 内容萃取 details extractions: Unfortunately, there is no good generic way to
+  extract structural data from the page. In the Bee package, the base class
+  Miner does not really do anything, the developers need to develop write
+  dedicated Miner for each sites. The good news is that web site does not
+  change their layout very often. If you write your Miner carefully, it can
+  even tolerate minor changes. For example, all Taobao store can almost share
+  the same Miner class. There are may techniques can be used, such as DOM,
+  XPath, Regex, CSS selector etc. You can even pickup the "url" output by the
+  base Miner class and use other applications to download and parse the page.
 
 Since the Bee is a crawler, it also covers functions that required to be
 a good general purpose crawler.
@@ -46,7 +49,495 @@ a good general purpose crawler.
 - HTTP related: USER_AGENT, proxy, authentication, GET/POST. These 
   are handled by Fetcher, its sub-class SimpleHTTPFetcher is good
   for most HTTP/GET accesses. 
-- encoding: you can relies on BeautifulSoup to detect the correct 
-  encoding, which often got wrong on Chinese sites. It is better 
-  to specify it in configuration
+- encoding: you can relies on BeautifulSoup to detect the correct encoding,
+  which often got wrong on Chinese sites. It is better to specify it in
+  configuration.  okaybuy.com.cn is a nasty one. It declares its encoding as
+  "zh-CN", but with invalid characters in it.  I have to patch BeautifulSoup and
+  picked "gb2312" for it. 
+- detecting site changes: It is actually quite difficult than it sounds. 
+  For small sites, we can afford to fully re-crawl them daily. For larger sites,
+  the typical strategy is to run multiple crawler, one or a few more frequent
+  small shallow crawling jobs plus one less frequent full crawl job.  
+
+================
+Running the Bee
+================
+
+
+Environment Requirement
+==========================
+
+It is developed and tested with Python 2.6.4 on Mac OS X (BSD). It should be
+able to be running on any os with recent version of Python. The following
+instructions are for Linux alike environments. Shell commands should be
+adjusted accordingly if running under Windows. Command scripts were created
+with +x option, they can be started with command line such as: ::
+  
+  ./taobao-crawler.py
+
+You can also specify the Python interpreter explicitly as: ::
+ 
+  python taobao-crawler.py
+
+
+Python can be obtained from http://python.org
+
+Python is a very friendly language. It is very close to the pseudo languages
+that you have seen in CS books. You can understand it perfectly without 
+ever learn it :-)  I started writing Python programs before reading any
+tutorials. As a matter of facts, I have never finished reading "Learning Python"
+book :-)  So, don't be scared
+
+First of all, please unpack and copy the package to your disk. Assume you 
+same the package at $HOME/bee directory.
+
+
+Then you need to set up environment variable PYTHONPATH ::
+
+  export PYTHONPATH=$HOME/bee
+
+Now, you can verify your installation buy running one of the tests ::
+
+    ted-mac:~ ted$ export PYTHONPATH=$HOME/bee
+    ted-mac:~ ted$ cd bee/tests
+    ted-mac:tests ted$ ./bee-test-1.py 
+
+If you see some lines without any errors, then you are good to go. Don't
+worry about what the output messages mean yet.
+
+Then, lets try crawl one of small Taobao store: ::
+
+    ted-mac:tests ted$ cd ../crawlers/
+    ted-mac:crawlers ted$ ./taobao-crawler.py carephilly
+    2010-03-24 16:08:22,807 [INFO] [bee.py:1055] Starting up the crawling job
+    2010-03-24 16:08:22,809 [INFO] [bee.py:752] Worker started
+    2010-03-24 16:08:22,810 [INFO] [bee.py:752] Worker started
+    2010-03-24 16:08:22,810 [INFO] [bee.py:1058] Waiting job to be done
+    2010-03-24 16:08:22,810 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(0, pending:1), Links:(0, succ:0, fail:0), Output: 0
+    2010-03-24 16:08:25,811 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(1, pending:0), Links:(1, succ:0, fail:0), Output: 0
+    2010-03-24 16:08:28,811 [INFO] [bee.py:1062] idle_cnt: 1, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:1, fail:0), Output: 0
+    2010-03-24 16:08:31,825 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:1, fail:0), Output: 0
+    2010-03-24 16:08:34,826 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(4, pending:64), Links:(3, succ:3, fail:0), Output: 0
+    2010-03-24 16:08:37,830 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:3, fail:0), Output: 1
+    2010-03-24 16:08:40,853 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:4, fail:0), Output: 1
+    2010-03-24 16:08:43,911 [INFO] [bee.py:1062] idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:5, fail:0), Output: 2
+
+Now it start crawling the 'carephilly' 卡芙琳 store. When it is ended it will
+show ::
+
+    2010-03-24 16:18:01,631 [INFO] [bee.py:1062] idle_cnt: 2, Workers: 2, Tasks:(958, pending:0), Links:(132, succ:132, fail:0), Output: 120
+    2010-03-24 16:18:01,631 [INFO] [bee.py:1066] idle_cnt 3 reached max, prepare to stop
+    2010-03-24 16:18:01,631 [INFO] [bee.py:1076] preparing to stop job
+    2010-03-24 16:18:01,662 [INFO] [bee.py:767] Worker ended
+    2010-03-24 16:18:01,702 [INFO] [bee.py:767] Worker ended
+    2010-03-24 16:18:01,703 [INFO] [bee.py:1079] Job is done
+
+Accessing Taobao from my laptop is really slow, it took about 10 minutes 
+to download the 120 products with 2 worker threads. 
+
+Every 3 seconds, it print a status line to show its progress: ::
+
+   idle_cnt: 0, Workers: 2, Tasks:(10, pending:130), Links:(5, succ:5, fail:0), Output: 2
+
+- idle_cnt: it becomes non-zero when it out of job and ready to exit
+- Workers: the number of worker threads
+- Tasks: crawling tasks status. (Workers work these tasks :-)
+ 
+  - the first number is the number of tasks the crawling job has finished 
+  - pending: number of tasks waiting to be done
+
+- Links: status of link access
+
+  - the first number is the number of link access attempts (mostly HTTP GET)
+  - succ: the number of times that the content of the link has been downloaded successfully
+  - fail: the number of times that the crawler had difficulties to open the link
+
+- Output: number of product descriptions that have been extracted since started
+
+While you are running the crawler, beside aforementioned status log lines, you
+can also have other way to observe the progress.
+
+First, you can tail the xx.prod.json file to watch what products it has found.
+xxx.prod.json file has one line ascii_safe JSON description for each product. 
+It is more readable with the help of "print_json.py" script. ::
+
+    ted-mac:crawlers ted$ tail -f taobao.carephilly.prod.json | ./print_json.py 
+    Line 1: {
+        "prod_price": "188.00", 
+        "shipping_cost": 0.0, 
+        "url": "http://item.taobao.com/auction/item_detail-0db2-d6a34a97fc369709c69ccc0bacb80d2e.htm", 
+        "prod_img_s_3": "http://img01.taobaocdn.com/imgextra/i1/91892992/T244XaXblXXXXXXXXX_!!91892992.jpg_40x40.jpg", 
+        "sku_url": "http://item.taobao.com/spu-89741729-4453893344-1.htm", 
+        "prod_img_s_4": "http://img01.taobaocdn.com/imgextra/i1/91892992/T26NXaXbdXXXXXXXXX_!!91892992.jpg_40x40.jpg", 
+        "prod_details": [
+            {
+                "attr_name": "货号", 
+                "attr_value": "货号:CL9905-2"
+            }, 
+            {
+                "attr_name": "品牌", 
+                "attr_value": "品牌:Caerphilly/卡芙琳"
+            }, 
+
+
+The crawler also creates xxx.link.db and xxx.task.db. They are sqlite3 database
+file.  BTW, sqlite is used in every Firefox browser and iPod. So it is nothing
+new. It is pretty neat for small application. They are used here so you can
+stop and restart the crawler without losing progresses. 
+
+To tail the latest tasks: ::
+
+  sqlite3 taobao.carephilly.task.db "select * from tasks order by ROWID desc limit 5"
+
+The tasks table become empty when all crawling tasks finished. 
+
+To tail the latest links being discovered: ::
+
+  ted-mac:crawlers ted$ sqlite3 taobao.carephilly.link.db "select * from links order by ROWID desc limit 5"
+
+
+To start other crawlers, please use following command ::
+
+  ./taobao-crawler.py carephilly
+  ./taobao-crawler.py maizhongfs.mall
+  ./taobao-crawler.py gracegift
+  ./okaybuy-crawler.py
+  ./paixie-crawler.py
+
+'paixie' has 11677 shoes. It takes a couple of hours with 2 workers running from US. 
+Might be faster when running from China. You can also change the configuration file
+to increase the number or workers. But please be polite to not bring down their site.
+
+
+Re-run the crawler
+====================
+
+Default policy set to re-crawl catalog page not sooner than 4 hours and 24-hours for 
+produce details page. So, after one pass of crawl, if you restart the crawler again,
+it probably will not do any thing and quite pretty soon. 
+
+If you want to force it to re-crawl from scratch, please remove the xxx.db files owned 
+by the crawlers. There are two db files for each crawler, one for linkdb and another 
+one for task queue.
+
+
+Logging
+===========
+
+Feel free to put the crawler on background and pipe the log to log file. You can also
+alter the crawler script to output to log file and adjust logging level.
+
+
+
+
+
+================================================
+Notes for Configuration and Future Development
+================================================
+
+Integration
+==============
+
+Currently, the default JSONDumper output the production description as JSON strings into
+text files. There are two ways to integrate the crawler with other part of the system
+
+ 1. Subclass Output, write to whatever the target storage directly
+ 2. "tail" the json file, pipe to another application that update the target storage. 
+
+The second solution probably is easier to test and debug. 
+
+One thing tho be aware is that one product can be output multiple times depends on 
+re-crawl policy. The Bee doesn't detect page changes, it simple re-crawl the page
+when it is timed out. Downstream applications are responsible to deter whether they
+are new products or update to existing product.
+
+
+Writing new crawler
+=====================
+
+Writing new crawler is not difficult if you are familiar with html DOM, regex and Python.
+
+
+Step 1: determine crawling path and Seeker Rules
+--------------------------------------------------
+
+Typically, most sites can be crawled by "search all" or "search new goods". For Taobao,
+I picked "所有宝贝", because the stores are small, only one hundred products each. ::
+
+  http://gracegift.taobao.com/?price1=&price2=&search=y&pageNum=1&scid=0&keyword=&orderType=_time&old_starts=&categoryp=&pidvid=&viewType=list&isNew=&ends=
+
+Then you determine the regex for "next pages" and product detail page. Then, write
+a simple test script to try out, for example taobao-test-seeker.py
+
+paixie.net is pretty easy, its website is clean.
+
+okaybuy.com.cn is a little difficult, it has non-shoe products and multiple
+search entry links on the page. I finally tight down the regex to only focus on
+code=001000000 and odrby=new. The initial seed is ::
+
+   http://www.okaybuy.com.cn/list.php?code=001000000&odrby=new&curpage=1"
+
+The seeker rules are ::
+
+  [
+    ['^http://www.okaybuy.com.cn/list.php\?code=001000000&odrby=new&curpage=\d+', 200, 14400, "simple_http_get", ["okaybuy_cat_seeker"], [], False,],
+    ['^http://www.okaybuy.com.cn/com/\d+.html$', 201, 86400, "simple_http_get", [], ["okaybuy_item_miner"], False,],
+  ]
+
+- The first rule means only follow "search shoes order by new products and page N".
+
+  - 200 means to allow the seeker to go down 200 hops deep. It is actually too
+    high, since each search page has link to next 10 pages, 200 hops can
+    exhaust 2000 search result page, way more than enough. 
+  - 14400 mean do not revisit the same search result page withing 4 hours. 
+  - "simple_http_get" is the name of Fetcher to be used in next step
+  - ["okaybuy_cat_seeker"] defines that the next step only run one Seeker,
+    "okaybuy_cat_seeker" on the page, 
+  - [] means not Miner will be invoked be cause we don't want to run Miner
+    on the search result page
+  - False: means that it should continue evaluate the next Seeker rule
+
+- The second rule defines next crawl task on product detail page
+  
+  - it can go up to 201 hops deep. It should be at least 1 hop bigger than 
+    the max seeker hops. 
+  - 86400 means we only revisit the product detail page every 24 hours
+  - [] means that no Seeker will be invoked on product detail page
+  - ["okaybuy_item_miner"] mean only one Miner will be invoked.
+  - False: means the seeker can continue evaluate rules
+
+
+Step 2: develop Miner
+-----------------------
+
+Miner has be to developed for each site :-(
+
+Typically you can download the page to view the source. One thing to be aware 
+is that the SimpleHTTPFetcher class does not execute JavaScript. You can use
+bee-test-0.py to dump the page or "wget" or "curl" etc.
+
+FireFox browser has a plug-in called FireBug  https://addons.mozilla.org/en-US/firefox/addon/1843
+It helps you to find the corresponding html source for the any given elements
+on the page. Then you can decide how to extract the information.
+
+The you can start writing the Miner class. You can start by copying one
+of existing Miner class. The OkaybuyItemMiner in okaybuy.py is one of 
+the example.
+
+It is also recommend to write a simple test script to try it out. You can start
+from an empty Miner class, then add one attribute at a time. For example
+tests-okaybuy-seeker.py
+
+The Miner.extract() interface allows you to extract multiple products from 
+one page. 
+
+
+Step 3: write the Job Rule
+----------------------------
+
+The job rule glues all pieces together. I used simple gen_job_rules() method 
+to construct it. You can actually write them as external JSON file then 
+load them when starting the crawling job. Typically, you would only need 
+to make a copy of one of existing method and update "encoding", "seed_url" 
+and "seeker_rules". 
+
+
+Components in Job Rule
+``````````````````````````
+
+"class_name" parameter defines which implementation class to be used as certain 
+components. "params" defines optional parameters to be passed into the constructor
+of the given class. 
+
+The whole crawling job is like a car, you can use different kinds of tires as long
+as its interface fits. For example, "bee" provided two implementations for
+TaskQueue, DBTaskQueue and MemTaskQueue. MemTaskQueue is faster than DBTaskQueue.
+However, if you stop the crawler process in the middle, MemTaskQueue will lose
+all pending tasks in queue. On the contrary, DBTaskQueue use sqlite tables to 
+persist the content of the task queue, it allows you to stop and restart the 
+crawler at any point of time. Similarly, you can implement a TaskQueue based on 
+MySQL server or some kind of messaging queue, then you can actually run the 
+same crawling job from multiple machines. 
+
+
+Seed Tasks
+`````````````
+
+Seek tasks will be inserted into task queue when the job started. You can describe
+multiple seed tasks in that section. But in most cases, you only need one.
+
+On the other extreme side, if you only want to grab a few specify pages, you can 
+define all of them as seed tasks, and use very small max_hop value in seeker rule, 
+or only define Miner tasks. 
+
+
+Step 4: Put Them Together
+----------------------------
+
+create new package file, such as taobao.py, put your Job Rule template and Miner
+class in it. Then write as simple start up script, such as crawlers/taobao-crawler.py
+
+
+Step 5: Test
+--------------
+
+Run it. Observe if there are any errors. You may need to adjust your Miner class
+and Seeker rules. 
+
+You can to lower the logging level to DEBUG to see more detailed information.
+
+You could also observe xxx.prod.json, xxx.link.db and xxx.task.db
+
+But most importantly the  job status log line. The first thing you want to avoid 
+is that it visited a lot of links but only find very few products. If the number
+of pending tasks grows too rapidly, it is also not a good sign. Best way to debug
+is to stop the crawler and check the content in link.db and task.db
+
+Once you finalized your design, you can increase the number of workers based on the 
+size of the site. The reset link.db and task.db. Then start you first formal run :-) 
+
+
+============================
+Design Notes for the Bee
+============================
+
+The structure of the Bee is quite simple. It is self-programming auto machine. 
+
+
+TaskDescription
+====================
+
+Task is described by a dictionary ::
+
+    {
+        "url": url, 
+        "revisit_interval": revisit_interval,
+        "fetcher": next_fetcher,
+        "seekers": next_seekers,
+        "miners": next_miners,
+        "hop": hop}
+    }
+
+It is stored as JSON string in task queue. Tasks are written by you in Job Rule as the seed tasks or by Seeker.
+
+The Tasks are executed by Worker.
+
+
+TaskQueue
+============
+
+TaskQueue holds TaskDescription. There is only one instance of TaskQueue
+for one crawling job. If the TaskQueue instance is accessible from 
+multiple machines, then the crawling job can be distributed onto 
+multiple machines.
+
+- Worker pop up tasks from its head
+- Seeker generates new tasks to make the crawler go further into the site
+- Worker push new tasks into the TaskQueue on the behalf of the Seeker
+- Worker can also requeue tasks on certain error conditions
+
+There are two implementations: MemTaskQueue and DBTaskQueue
+
+
+Worker
+========
+
+It is the driving force for the Bee. 
+
+- It pop up tasks from the head of the TaskQueue
+- It checks with LinkDB to determine whether to visit/revisit the given
+  url.
+- It also handler the error-defer-retry logic by re-queue some tasks
+- It calls Fetcher to retrieve page
+- It feeds the Page object to all Seekers and all Miners that are
+  described by the task
+- It pushs new tasks that are generated by Seekers into the TaskQueue
+- It writes products extracted by Miners into Output
+- It keeps looping until stop() is invoked
+
+
+Job can start multiple Worker instances on one or multiple machines.
+
+
+Fetcher
+=========
+
+Fetcher is responsible of accessing Internet. For given url, it returns
+Page object. 
+
+bee provides one Fetcher implementation SimpleHTTPFetcher.
+
+
+Page
+=====
+
+Page holds the data retrieve from Internet. bee provides one implementation
+HTMLPage
+
+- url attribute is the final url the HTTP request landed.
+- data attribute holds the raw data from the Internet
+- soup attribute holds the data being parsed by BeautifulSoup
+
+
+LinkDB
+========
+
+It holds status and access history of links. bee provides one implementation SqliteLinkDB
+
+
+Seeker
+========
+
+It is responsible of looking for new paths and generate new tasks. New Seeker tasks to crawler further or new Seeker tasks to extract products.
+
+bee provides one implementation RuleBasedSeeker, which is driven by seeker rules. The formation of seeker rule has been described in previous chapters.
+
+While the RulBasedSeeker is already very powerful, you may still need to 
+develop new Seeker implementations for very difficult sites.
+
+
+Miner
+=======
+
+Miner extracts structured information from page. It has to be customized for each site. 
+
+
+Output
+========
+
+It is the channel where the Worker pushes the final products. bee provides
+one implementation JSONDumper.
+
+
+Job
+=====
+
+- It reads the Job Rule. 
+- Initialize all data structures. 
+  
+  - TaskQueue
+  - LinkDB
+  - Output
+  - FetcherFactory
+  - SeekerFactory
+  - MinerFactory
+
+- Feeds seed tasks into the TaskQueue
+- Creates Workers and start workers in worker threads
+- It then wait the job to be done, which is 
+
+  - TaskQueue empty
+  - No more new tasks coming
+
+- Meanwhile, it print status lines to logging device when it has chance
+
+
+BeautifulSoup
+================
+
+It is wonderful package for parsing HTML/XML. It can be found here
+http://www.crummy.com/software/BeautifulSoup/documentation.html
+
+There is one version included in the bee package. It is a modified version
+that tolerates encoding errors.
 
