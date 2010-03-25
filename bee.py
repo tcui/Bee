@@ -555,9 +555,12 @@ class Miner:
     def extract(self, page):
         """
         extract entities from 'page'. return a list of entities. Each
-        entity is a dictionary
+        entity is a dictionary.
+
+        The default implementation only output the url of the page
         """
-        return []
+        return [ {"url": page.url,}, ]
+
 
 
 class TaskQueue:

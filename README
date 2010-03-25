@@ -1,0 +1,52 @@
+*******************************************************
+Bee -- 小蜜蜂 -- 采花于 Internet
+*******************************************************
+
+:Author: ted@tcui.org
+:Created: 2010/03/24
+
+=============
+Overview
+=============
+
+Bee (小蜜蜂) 是一个灵活小巧的定向爬虫。具有高度的可配置性和扩展性。
+与通用的网页爬虫相比，定向爬虫需要解决的问题有：
+
+- focus on certain areas of a site: you do not want to retrieve every single
+  page of a site. Most likely, you only want to visit product catalog pages and
+  product details pages
+- crawling depth and crawling path: since you want to harvest complete product
+  catalogs, the crawler will need to "page" through all catalog pages. In other 
+  words, the crawler can go very deep into the site. On modern shopping sites,
+  catalog pages are actually backed by "search" functions, which means there
+  are hundreds of ways to represent the catalog. The crawler could get into
+  infinite loops, if crawling path is not controlled carefully. The crawling
+  process in Bee is controlled by Seeker class. Its sub-class RuleBasedSeeker
+  is a pretty generic abstraction. You can define you crawling paths by
+  feeding it some simple rules. In extreme cases, you may need to sub-class
+  it to implement more sophisticated crawling controls.
+- details extractions: Unfortunately, there is no good generic way to extract
+  structural data from the page. In the Bee package, the base class Miner
+  does not really do anything, the developers need to develop write dedicated
+  Miner for each sites. The good news is that web site does not change their 
+  layout very often. If you write your Miner carefully, it can even tolerate 
+  minor changes. For example, all Taobao store can almost share the same 
+  Miner class. There are may techniques can be used, such as DOM, XPath,
+  Regex etc. You can even pickup the "url" output by the base Miner class
+  and use other applications to download and parse the page.
+
+Since the Bee is a crawler, it also covers functions that required to be
+a good general purpose crawler.
+
+- concurrency: controlled by the number of worker thread, configurable
+  in Job rules
+- rate control: simple "pause" can be configured
+- re-visit: do not revisit the page if it has been visited in the past
+  N seconds
+- HTTP related: USER_AGENT, proxy, authentication, GET/POST. These 
+  are handled by Fetcher, its sub-class SimpleHTTPFetcher is good
+  for most HTTP/GET accesses. 
+- encoding: you can relies on BeautifulSoup to detect the correct 
+  encoding, which often got wrong on Chinese sites. It is better 
+  to specify it in configuration
+
